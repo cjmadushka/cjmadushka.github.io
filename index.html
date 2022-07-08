@@ -1,1 +1,253 @@
-hello
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Encoder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- Side Navigation -->
+    <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+        <h1 class="w3-xxxlarge w3-text-theme">Side Navigation</h1>
+        <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i></button>
+        <a href="#" class="w3-bar-item w3-button">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button">Link 3</a>
+        <a href="#" class="w3-bar-item w3-button">Link 4</a>
+    </nav>
+
+    <!-- Header -->
+    <header class="w3-container w3-theme w3-padding" id="myHeader">
+        <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+        <div class="w3-center">
+            <h4>CJ Encoder/Decoder</h4>
+            <h1 class="w3-xxxlarge w3-animate-bottom">Test Project</h1>
+            <div class="w3-padding-32">
+            </div>
+        </div>
+    </header>
+
+    <!-- Modal -->
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-theme-l1">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class="w3-button w3-display-topright">×</span>
+                <h4>Oh snap! We just showed you a modal..</h4>
+                <h5>Because we can <i class="fa fa-smile-o"></i></h5>
+            </header>
+            <div class="w3-padding">
+                <p>Cool huh? Ok, enough teasing around..</p>
+                <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
+            </div>
+            <footer class="w3-container w3-theme-l1">
+                <p>Modal footer</p>
+            </footer>
+        </div>
+    </div>
+    <div class="w3-row-padding">
+
+        <div class="w3-half">
+            <form class="w3-container w3-card-4">
+                <h2 class="cont1">English</h2>
+                <div class="w3-section">
+                    <textarea name="english" style="width: 100%;" id="enginput" cols="30" rows="15"></textarea>
+                </div>
+
+            </form>
+        </div>
+        <div class="w3-half">
+            <form class="w3-container w3-card-4">
+                <h2 class="cont2">Secret</h2>
+                <div class="w3-section">
+                    <div id="scvalue"
+                        style="border: 1px solid black;width:100%;height:350px;word-wrap:break-word;white-space: pre;">
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    <div class="switchbtn">Switch</div>
+    <script>
+        let Secret = '';
+        let flip = false;
+
+        $('.switchbtn').click(function () {
+            if (!flip) {
+                $('.cont1').text('Secret');
+                $('.cont2').text('English');
+                $('#enginput').val('');
+                $('#scvalue').html('');
+                flip = true;
+            } else {
+                $('.cont1').text('English');
+                $('.cont2').text('Secret');
+                $('#enginput').val('');
+                $('#scvalue').html('');
+                flip = false;
+
+            }
+        })
+
+        $('#enginput').bind('input propertychange', function () {
+            if (!flip) {
+                Encode(this.value);
+            } else {
+                if (this.value.length%2==0) {
+                    Decode(this.value);
+                }else{
+                    $('#scvalue').html('<h3 style="color:red;">Invalid</h3>');
+                }
+            }
+            Secret = '';
+        });
+
+        function Encode(text) {
+            console.log(text)
+            for (let i = 0; i < text.length; i++) {
+                Secret += dictionary[text[i]];
+            }
+            $('#scvalue').html(Secret.toString());
+        }
+
+        function Decode(text) {
+            for (var i = 0, charsLength = text.length; i < charsLength; i += 2) {
+                Secret+=Object.keys(dictionary).find(key => dictionary[key] === text.substring(i, i + 2));
+            }
+            $('#scvalue').html(Secret.toString());
+        }
+
+        let dictionary = {
+            'a': '10',
+            'b': '11',
+            'c': '12',
+            'd': '13',
+            'e': '14',
+            'f': '15',
+            'g': '16',
+            'h': '17',
+            'i': '18',
+            'j': '19',
+            'k': '20',
+            'l': '21',
+            'm': '22',
+            'n': '23',
+            'o': '24',
+            'p': '25',
+            'q': '26',
+            'r': '27',
+            's': '28',
+            't': '29',
+            'u': '30',
+            'v': '31',
+            'w': '32',
+            'x': '33',
+            'y': '34',
+            'z': '35',
+            'A': '36',
+            'B': '37',
+            'C': '38',
+            'D': '39',
+            'E': '40',
+            'F': '41',
+            'G': '42',
+            'H': '43',
+            'I': '44',
+            'J': '45',
+            'K': '46',
+            'L': '47',
+            'M': '48',
+            'N': '49',
+            'O': '50',
+            'P': '51',
+            'Q': '52',
+            'R': '53',
+            'S': '54',
+            'T': '55',
+            'U': '56',
+            'V': '57',
+            'W': '58',
+            'X': '59',
+            'Y': '60',
+            'Z': '61',
+            ' ': '62',
+            ',': '63',
+            '.': '64',
+            '/': '65',
+            '?': '66',
+            '<': '67',
+            '>': '68',
+            '!': '69',
+            '@': '70',
+            '#': '71',
+            '$': '72',
+            '%': '73',
+            '^': '74',
+            '&': '75',
+            '*': '76',
+            '(': '77',
+            ')': '78',
+            '_': '79',
+            '-': '80',
+            '=': '81',
+            '+': '82',
+            '{': '83',
+            '}': '84',
+            '|': '85',
+            ';': '86',
+            ':': '87',
+            '`': '88',
+            '~': '89',
+            '0': '90',
+            '1': '91',
+            '2': '92',
+            '3': '93',
+            '4': '94',
+            '5': '95',
+            '6': '96',
+            '7': '97',
+            '8': '98',
+            '9': '99',
+            '\n': '\n',
+
+
+        }
+    </script>
+    <style>
+        .switchbtn {
+            cursor: pointer;
+            position: relative;
+            margin-top: 30px;
+            border-radius: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            height: 50px;
+            width: 100px;
+            background-color: black;
+            color: aliceblue;
+            line-height: 3.2;
+            font-weight: 600;
+            border: 1px solid black;
+            transition: 0.2s;
+        }
+
+        .switchbtn:hover {
+            background-color: aliceblue;
+            color: black;
+        }
+    </style>
+
+</body>
+
+</html>
