@@ -99,6 +99,11 @@
             }
         })
 
+         $('#enginput').keypress(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+            }
+        });
         $('#enginput').bind('input propertychange', function () {
             if (!flip) {
                 Encode(this.value);
